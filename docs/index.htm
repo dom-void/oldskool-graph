@@ -41,6 +41,9 @@
     h1 {
         text-align: center;
         padding-inline: 0.5em;
+        padding-bottom: .07em;
+        color: var(--back-color);
+        background-color: var(--front-color);
     }
 
     canvas {
@@ -131,8 +134,9 @@
                     if (y1 >= m[Math.round(x1)]) {
                         m[Math.round(x1)] = y1;
                         plot(x1, y1);
+                    } else {
+                        config.isTransparent && plot(x1, y1);
                     }
-                    config.isTransparent && plot(x1, y1);
                 }
             }
         }
