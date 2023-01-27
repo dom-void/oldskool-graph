@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oldskool Graph</title>
+    <!-- <meta http-equiv="refresh" content="3"> -->
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: rgb(21, 78, 56);
+        color: rgb(92, 207, 176);
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 1em;
+    }
+
+    canvas {
+        width: 95vw;
+        height: calc((6/9)*95vw);
+    }
+
+    button {
+        background: transparent;
+        color: rgb(92, 207, 176);
+        width: 10em;
+        height: 2em;
+        padding: auto;
+        border-radius: 3px;
+        border: 1px solid rgb(92, 207, 176);
+    }
+
+    @media (min-width: 900px) {
+        canvas {
+            width: 900px;
+            height: 600px;
+        }
+    }
+
+</style>
+
+<body>
+    <canvas id="screen" width="900" height="600" style="margin: auto;"></canvas>
+    <aside>
+        <section>
+            <button id="grain"></button>
+            <button id="transparent"></button>
+        </section>
+    </aside>
+
+    <script>
+        let cfg = {
+            isGrained: false,
+            isTransparent: false,
+            depth: 10, // 2-10
+            density: 5, // 2-10
+            point: 2, // 1-5
+            height: 110, // 1-185
+            solidity: 97, // 90-99
+        };
+
+        const plot = (x, y) => scr.fillRect(x * 2, 595 - y * 2, cfg.point, cfg.point);
+
+        const grain = (fn) => cfg.isGrained ? Math.round(fn) : fn;
+
+        let screen = document.getElementById('screen');
+        let scr = screen.getContext('2d');
+        scr.fillStyle = 'rgb(92, 207, 176)';
+
+        let btnGrain = document.querySelector('#grain');
+        btnGrain.innerHTML = cfg.isGrained ? 'smooth' : 'grained';
+        
+        let btnTransparent = document.querySelector('#transparent');
+        btnTransparent.innerHTML = cfg.isTransparent ? 'opaque' : 'transparent';
+
+        const draw = (config) => {
+            scr.clearRect(0, 0, screen.width, screen.height);
+            let m = new Array(450).fill(0);
+            let a = Math.cos(Math.PI / config.depth);
+            let e, c, d, z, x1, y1;
+            for (let y = 1; y <= 230; y = y + config.density) {
+                e = a * y;
+                c = y - 115;
+                c = c * c;
+                for (let x = 1; x <= 230; x++) {
+                    d = x - 115;
+                    z = config.height * Math.exp((config.solidity - 101) * 0.0001 * (c + d * d));
+                    x1 = grain(x + e);
+                    y1 = grain(z + e);
+                    if (y1 >= m[Math.round(x1)]) {
+                        m[Math.round(x1)] = y1;
+                        plot(x1, y1);
+                    }
+                    config.isTransparent && plot(x1, y1);
+                }
+            }
+        }
+
+        draw({...cfg});
+
+        btnGrain.addEventListener('click', (e) => {
+            const isGrained = !cfg.isGrained;
+            cfg = {...cfg, isGrained};
+            draw({...cfg});
+            btnGrain.innerHTML = isGrained ? 'smooth' : 'grained';
+        });
+
+        btnTransparent.addEventListener('click', () => {
+            const isTransparent = !cfg.isTransparent;
+            cfg = {...cfg, isTransparent};
+            draw({...cfg});
+            btnTransparent.innerHTML = isTransparent ? 'opaque' : 'transparent';
+        })
+    </script>
+</body>
+
+</html>
