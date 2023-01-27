@@ -15,45 +15,73 @@
         box-sizing: border-box;
     }
 
+    :root {
+        --accent-color: rgb(143, 252, 223);
+        --front-color: rgb(92, 207, 176);
+        --back-color: rgb(21, 78, 56);
+    }
+
     body {
-        background-color: rgb(21, 78, 56);
-        color: rgb(92, 207, 176);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: var(--back-color);
+        color: var(--front-color);
         width: 100vw;
+        max-width: 910px;
         height: 100vh;
+        margin: auto;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        align-content: center;
+        align-content: flex-start;
         justify-content: center;
-        gap: 1em;
+        gap: 1.5em;
+        padding-top: 5vh;
+    }
+
+    h1 {
+        text-align: center;
+        padding-inline: 0.5em;
     }
 
     canvas {
         width: 95vw;
-        height: calc((6/9)*95vw);
+        height: calc((5.5/9)*95vw);
     }
 
     button {
         background: transparent;
-        color: rgb(92, 207, 176);
+        color: var(--front-color);
         width: 10em;
         height: 2em;
         padding: auto;
         border-radius: 3px;
-        border: 1px solid rgb(92, 207, 176);
+        border: 1px solid var(--front-color);
     }
 
-    @media (min-width: 900px) {
+    button:hover {
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+
+    @media (min-width: 920px) {
         canvas {
             width: 900px;
-            height: 600px;
+            height: 550px;
+        }
+        body {
+            gap: 2em;
         }
     }
 
 </style>
 
 <body>
-    <canvas id="screen" width="900" height="600" style="margin: auto;"></canvas>
+    <header>
+        <h1>
+            Retro computer 3D graph simulator
+        </h1>
+    </header>
+    <canvas id="screen" width="900" height="550" style="margin: auto;"></canvas>
     <aside>
         <section>
             <button id="grain"></button>
@@ -68,11 +96,11 @@
             depth: 10, // 2-10
             density: 5, // 2-10
             point: 2, // 1-5
-            height: 110, // 1-185
+            height: 135, // 1-155
             solidity: 97, // 90-99
         };
 
-        const plot = (x, y) => scr.fillRect(x * 2, 595 - y * 2, cfg.point, cfg.point);
+        const plot = (x, y) => scr.fillRect(x * 2, 545 - y * 2, cfg.point, cfg.point);
 
         const grain = (fn) => cfg.isGrained ? Math.round(fn) : fn;
 
@@ -81,7 +109,7 @@
         scr.fillStyle = 'rgb(92, 207, 176)';
 
         let btnGrain = document.querySelector('#grain');
-        btnGrain.innerHTML = cfg.isGrained ? 'smooth' : 'grained';
+        btnGrain.innerHTML = cfg.isGrained ? 'hi-res' : 'lo-res';
         
         let btnTransparent = document.querySelector('#transparent');
         btnTransparent.innerHTML = cfg.isTransparent ? 'opaque' : 'transparent';
@@ -115,7 +143,7 @@
             const isGrained = !cfg.isGrained;
             cfg = {...cfg, isGrained};
             draw({...cfg});
-            btnGrain.innerHTML = isGrained ? 'smooth' : 'grained';
+            btnGrain.innerHTML = isGrained ? 'hi-res' : 'lo-res';
         });
 
         btnTransparent.addEventListener('click', () => {
