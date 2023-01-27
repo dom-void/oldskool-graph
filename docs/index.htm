@@ -27,7 +27,6 @@
         color: var(--front-color);
         width: 100vw;
         max-width: 910px;
-        height: 100vh;
         margin: auto;
         display: flex;
         flex-direction: row;
@@ -35,10 +34,17 @@
         align-content: flex-start;
         justify-content: center;
         gap: 1.5em;
-        padding-top: 5vh;
+        padding-block: 5vh;
+    }
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
     }
 
     h1 {
+        font-size: 1.5em;
         text-align: center;
         padding-inline: 0.5em;
         padding-bottom: .07em;
@@ -57,13 +63,47 @@
         width: 10em;
         height: 2em;
         padding: auto;
-        border-radius: 3px;
+        /* border-radius: 3px; */
         border: 1px solid var(--front-color);
+        opacity: .7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
     }
 
     button:hover {
-        color: var(--accent-color);
-        border-color: var(--accent-color);
+        opacity: 1;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 25px;
+        background: transparent;
+        border: 1px solid var(--front-color);
+        outline: 1px;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: var(--front-color);
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: var(--front-color);
+        cursor: pointer;
     }
 
     @media (min-width: 920px) {
@@ -71,11 +111,11 @@
             width: 900px;
             height: 550px;
         }
+
         body {
             gap: 2em;
         }
     }
-
 </style>
 
 <body>
@@ -89,6 +129,21 @@
         <section>
             <button id="grain"></button>
             <button id="transparent"></button>
+        </section>
+        <section>
+            <input type="range" min="2" max="10" class="slider" id="depth">
+        </section>
+        <section>
+            <input type="range" min="2" max="10" class="slider" id="density">
+        </section>
+        <section>
+            <input type="range" min="1" max="5" class="slider" id="point">
+        </section>
+        <section>
+            <input type="range" min="1" max="155" class="slider" id="height">
+        </section>
+        <section>
+            <input type="range" min="90" max="99" class="slider" id="solidity">
         </section>
     </aside>
 
@@ -113,9 +168,24 @@
 
         let btnGrain = document.querySelector('#grain');
         btnGrain.innerHTML = cfg.isGrained ? 'hi-res' : 'lo-res';
-        
+
         let btnTransparent = document.querySelector('#transparent');
         btnTransparent.innerHTML = cfg.isTransparent ? 'opaque' : 'transparent';
+
+        let rangeDepth = document.querySelector('#depth');
+        rangeDepth.value = cfg.depth;
+
+        let rangeDensity = document.querySelector('#density');
+        rangeDensity.value = cfg.density;
+
+        let rangePoint = document.querySelector('#point');
+        rangePoint.value = cfg.point;
+
+        let rangeHeight = document.querySelector('#height');
+        rangeHeight.value = cfg.height;
+
+        let rangeSolidity = document.querySelector('#solidity');
+        rangeSolidity.value = cfg.solidity;
 
         const draw = (config) => {
             scr.clearRect(0, 0, screen.width, screen.height);
@@ -141,21 +211,54 @@
             }
         }
 
-        draw({...cfg});
+        draw({ ...cfg });
 
         btnGrain.addEventListener('click', (e) => {
             const isGrained = !cfg.isGrained;
-            cfg = {...cfg, isGrained};
-            draw({...cfg});
+            cfg = { ...cfg, isGrained };
+            draw({ ...cfg });
             btnGrain.innerHTML = isGrained ? 'hi-res' : 'lo-res';
         });
 
         btnTransparent.addEventListener('click', () => {
             const isTransparent = !cfg.isTransparent;
-            cfg = {...cfg, isTransparent};
-            draw({...cfg});
+            cfg = { ...cfg, isTransparent };
+            draw({ ...cfg });
             btnTransparent.innerHTML = isTransparent ? 'opaque' : 'transparent';
-        })
+        });
+
+        rangeDepth.addEventListener('change', (e) => {
+            const depth = parseInt(e.target.value);
+            cfg = { ...cfg, depth };
+            draw({ ...cfg });
+        });
+
+        rangeDensity.addEventListener('change', (e) => {
+            const density = parseInt(e.target.value);
+            cfg = { ...cfg, density };
+            draw({ ...cfg });
+        });
+        
+        rangePoint.addEventListener('change', (e) => {
+            const point = parseInt(e.target.value);
+            cfg = { ...cfg, point };
+            draw({ ...cfg });
+        });
+        
+        rangeHeight.addEventListener('change', (e) => {
+            const height = parseInt(e.target.value);
+            cfg = { ...cfg, height };
+            console.log(cfg);
+            draw({ ...cfg });
+        });
+
+        rangeSolidity.addEventListener('change', (e) => {
+            const solidity = parseInt(e.target.value);
+            cfg = { ...cfg, solidity };
+            console.log(cfg);
+            draw({ ...cfg });
+        });
+    
     </script>
 </body>
 
