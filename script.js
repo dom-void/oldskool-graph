@@ -1,6 +1,14 @@
 let cfg = {
-    isGrained: false,
-    isTransparent: false,
+    isGrained: {
+        value: false,
+        nameTrue: 'smooth',
+        nameFalse: 'retro',
+    },
+    isTransparent: {
+        value: false,
+        nameTrue: 'opaque',
+        nameFalse: 'transparent',
+    },
     depth: {
         value: 10,
         min: 2,
@@ -33,10 +41,10 @@ let scr = screen.getContext('2d');
 scr.fillStyle = 'rgb(92, 207, 176)';
 
 let btnGrain = document.querySelector('#grain');
-btnGrain.innerHTML = cfg.isGrained ? 'hi-res' : 'lo-res';
+btnGrain.innerHTML = cfg.isGrained.value ? cfg.isGrained.nameTrue : cfg.isGrained.nameFalse;
 
 let btnTransparent = document.querySelector('#transparent');
-btnTransparent.innerHTML = cfg.isTransparent ? 'opaque' : 'transparent';
+btnTransparent.innerHTML = cfg.isTransparent.value ? cfg.isTransparent.nameTrue : cfg.isTransparent.nameFalse;
 
 const handleSliderConfig = (propertyName) => {
     const selector = '#' + propertyName;
@@ -55,7 +63,7 @@ let rangeSolidity = handleSliderConfig('solidity');
 
 const plot = (x, y) => scr.fillRect(x * 2, 545 - y * 2, cfg.point.value, cfg.point.value);
 
-const grain = (fn) => cfg.isGrained ? Math.round(fn) : fn;
+const grain = (fn) => cfg.isGrained.value ? Math.round(fn) : fn;
 
 const graph = (config) => {
     scr.clearRect(0, 0, screen.width, screen.height);
@@ -75,7 +83,7 @@ const graph = (config) => {
                 m[Math.round(x1)] = y1;
                 plot(x1, y1);
             } else {
-                config.isTransparent && plot(x1, y1);
+                config.isTransparent.value && plot(x1, y1);
             }
         }
     }
@@ -86,20 +94,16 @@ graph({ ...cfg });
 const handleBtn = ({
     propertyName,
     buttonNode,
-    nameTrue,
-    nameFalse,
 }) => {
-    cfg[propertyName] = !cfg[propertyName];
+    cfg[propertyName].value = !cfg[propertyName].value;
     graph(cfg);
-    buttonNode.innerHTML = cfg[propertyName] ? nameTrue : nameFalse;
+    buttonNode.innerHTML = cfg[propertyName].value ? cfg[propertyName].nameTrue : cfg[propertyName].nameFalse;
 };
 
 btnGrain.addEventListener('click', () =>
     handleBtn({
         propertyName: 'isGrained',
         buttonNode: btnGrain,
-        nameTrue: 'hi-res',
-        nameFalse: 'lo-res',
     })
 );
 
@@ -107,8 +111,6 @@ btnTransparent.addEventListener('click', () =>
     handleBtn({
         propertyName: 'isTransparent',
         buttonNode: btnTransparent,
-        nameTrue: 'opaque',
-        nameFalse: 'transparent',
     })
 );
 

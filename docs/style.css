@@ -86,6 +86,9 @@ button:hover {
     width: 25px;
     height: 25px;
     background: var(--front-color);
+    background-size: 25px 25px;
+    border-radius: 0;
+    border: none;
     cursor: pointer;
 }
 
@@ -93,7 +96,50 @@ button:hover {
     width: 25px;
     height: 25px;
     background: var(--front-color);
+    background-size: 25px 25px;
+    border-radius: 0;
+    border: none;
     cursor: pointer;
+}
+
+#density.slider::-webkit-slider-thumb {
+    background-image: url('./assets/density.png');
+}
+
+#density.slider::-moz-range-thumb {
+    background-image: url('./assets/density.png');
+}
+
+#depth.slider::-webkit-slider-thumb {
+    background-image: url('./assets/depth.png');
+}
+
+#depth.slider::-moz-range-thumb {
+    background-image: url('./assets/depth.png');
+}
+
+#height.slider::-webkit-slider-thumb {
+    background-image: url('./assets/height.png');
+}
+
+#height.slider::-moz-range-thumb {
+    background-image: url('./assets/height.png');
+}
+
+#point.slider::-webkit-slider-thumb {
+    background-image: url('./assets/point.png');
+}
+
+#point.slider::-moz-range-thumb {
+    background-image: url('./assets/point.png');
+}
+
+#solidity.slider::-webkit-slider-thumb {
+    background-image: url('./assets/solidity.png');
+}
+
+#solidity.slider::-moz-range-thumb {
+    background-image: url('./assets/solidity.png');
 }
 
 @media (min-width: 920px) {
