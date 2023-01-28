@@ -160,7 +160,7 @@ footer {
     justify-content: center;
 }
 
-@media (min-width: 920px) {
+@media screen and (min-width: 920px) {
     canvas {
         width: 900px;
         height: 550px;
@@ -171,9 +171,13 @@ footer {
     }
 }
 
-@media screen and (orientation: portrait) {
+@media ((orientation: portrait) and (max-aspect-ratio: 3/5)) or ((orientation: portrait) and (min-width: 600px) and (max-aspect-ratio: 20/22)){
     footer {
         position: absolute;
         bottom: 9px;
+    }
+
+    aside {
+        margin-top: 2em;
     }
 }
