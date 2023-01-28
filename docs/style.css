@@ -21,11 +21,11 @@ body {
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: center;
-    gap: 1.5em;
     padding-bottom: 5vh;
 }
 
 aside {
+    margin-top: 3em;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -49,6 +49,7 @@ h1 {
 canvas {
     width: 95vw;
     height: calc((5.5/9)*95vw);
+    margin-top: 2em;
 }
 
 button {
