@@ -49,7 +49,7 @@ h1 {
 canvas {
     width: 95vw;
     height: calc((5.5/9)*95vw);
-    margin-top: 2em;
+    margin-top: 3em;
 }
 
 button {
@@ -172,7 +172,7 @@ footer {
     }
 }
 
-@media ((orientation: portrait) and (max-aspect-ratio: 3/5)) or ((orientation: portrait) and (min-height: 600px) and (max-aspect-ratio: 20/22)){
+@media (orientation: portrait) and (max-aspect-ratio: 4/5) {
     footer {
         position: absolute;
         bottom: 9px;
