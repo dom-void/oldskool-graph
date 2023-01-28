@@ -25,10 +25,10 @@ body {
 }
 
 aside {
-    margin-top: 3em;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    margin-top: 3em;
 }
 
 header {
@@ -172,13 +172,23 @@ footer {
     }
 }
 
-@media (orientation: portrait) and (max-aspect-ratio: 4/5) {
+@media (orientation: portrait) and (max-aspect-ratio: 3/5) {
     footer {
         position: absolute;
         bottom: 9px;
     }
+}
 
-    aside {
-        margin-top: 2em;
+@media (orientation: portrait) and (min-width: 400px) and (max-aspect-ratio: 4/6) {
+    footer {
+        position: absolute;
+        bottom: 9px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 520px) and (max-aspect-ratio: 7/8) {
+    footer {
+        position: absolute;
+        bottom: 9px;
     }
 }
