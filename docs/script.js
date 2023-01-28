@@ -119,8 +119,8 @@ const handleRange = (event, propertyName) => {
     graph(cfg);
 };
 
-rangeDepth.addEventListener('change', (e) => handleRange(e, 'depth'));
-rangeDensity.addEventListener('change', (e) => handleRange(e, 'density'));
-rangePoint.addEventListener('change', (e) => handleRange(e, 'point'));
-rangeHeight.addEventListener('change', (e) => handleRange(e, 'height'));
-rangeSolidity.addEventListener('change', (e) => handleRange(e, 'solidity'));
+rangeDepth.addEventListener('input', (e) => handleRange(e, 'depth'));
+rangeDensity.addEventListener('input', (e) => handleRange(e, 'density'));
+rangePoint.addEventListener('input', (e) => handleRange(e, 'point'));
+rangeHeight.addEventListener('input', (e) => handleRange(e, 'height'));
+rangeSolidity.addEventListener('input', (e) => handleRange(e, 'solidity'));
