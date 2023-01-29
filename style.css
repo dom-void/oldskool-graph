@@ -33,7 +33,7 @@ aside {
 
 header {
     width: 100%;
-    margin-block: 6px 1em;
+    margin: 6px 0 1em 0;
 }
 
 h1 {
