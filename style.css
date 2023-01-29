@@ -160,6 +160,10 @@ footer {
     justify-content: center;
 }
 
+.small-caps {
+    font-variant: small-caps;
+}
+
 @media screen and (min-width: 920px) {
     canvas {
         width: 900px;
