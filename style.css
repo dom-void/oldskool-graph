@@ -33,7 +33,7 @@ aside {
 
 header {
     width: 100%;
-    margin-top: 6px;
+    margin-block: 6px 1em;
 }
 
 h1 {
@@ -49,7 +49,6 @@ h1 {
 canvas {
     width: 95vw;
     height: calc((5.5/9)*95vw);
-    margin-top: 3em;
 }
 
 button {
@@ -150,7 +149,7 @@ button:hover {
 
 footer {
     width: 100%;
-    padding-bottom: .1em;
+    padding-bottom: 1px;
     margin-top: 3em;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: .7em;
@@ -179,7 +178,14 @@ footer {
     }
 }
 
-@media (orientation: portrait) and (min-width: 400px) and (max-aspect-ratio: 4/6) {
+@media (orientation: portrait) and (min-width: 300px) and (max-aspect-ratio: 4/6) {
+    footer {
+        position: absolute;
+        bottom: 9px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 400px) and (max-aspect-ratio: 5/6) {
     footer {
         position: absolute;
         bottom: 9px;
