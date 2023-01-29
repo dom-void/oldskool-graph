@@ -165,10 +165,6 @@ footer {
         width: 900px;
         height: 550px;
     }
-
-    body {
-        gap: 2em;
-    }
 }
 
 @media (orientation: portrait) and (max-aspect-ratio: 3/5) {
