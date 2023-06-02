@@ -1,5 +1,5 @@
 # retrograph
-A retro computing 3d function graph based on 8-bit BASIC program
+A retro computing 3d function graph based on 8-bit BASIC program  
 [Preview RETROGRAPH >>](https://dom-void.github.io/retrograph/)
 
 # TODO
